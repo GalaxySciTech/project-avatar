@@ -8,8 +8,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="mt-32 text-center text-5xl font-black">
-        Project Avatar
+      <div className="mt-8 text-center text-5xl font-black">
+        
       </div>
     </>
   );

@@ -3287,6 +3287,11 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+maath@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmmirror.com/maath/-/maath-0.7.0.tgz#a9a44fe2f7680959d7cc75466ac11329e96db66c"
+  integrity sha512-JQ1JZrQLDgJ59snCk2AcSb/jdGwNgGQXlLcfZChN8lmpMR7g3bpMM3ugcqGfU1ROwjVvX5CvcVJHc8TkxljG8Q==
+
 media-query-parser@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmmirror.com/media-query-parser/-/media-query-parser-2.0.2.tgz#ff79e56cee92615a304a1c2fa4f2bd056c0a1d29"

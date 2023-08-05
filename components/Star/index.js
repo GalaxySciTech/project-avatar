@@ -18,13 +18,10 @@ export default function App() {
     >
       <Canvas camera={{ position: [0, 0, 10] }}>
         <color attach="background" args={["black"]} />
-        <Float speed={4} rotationIntensity={1} floatIntensity={2}>
+        <Float speed={1} rotationIntensity={0.25} floatIntensity={0.5}>
           <Atom />
         </Float>
-        <Stars saturation={0} count={400} speed={0.5} />
-        <EffectComposer>
-          <Bloom mipmapBlur luminanceThreshold={1} radius={0.7} />
-        </EffectComposer>
+        <Stars saturation={0} count={100} speed={0.1} />
       </Canvas>
     </div>
   );
@@ -34,7 +31,7 @@ function Atom(props) {
   const points = useMemo(
     () =>
       new THREE.EllipseCurve(0, 0, 3, 1.15, 0, 2 * Math.PI, false, 0).getPoints(
-        100
+        50
       ),
     []
   );
@@ -55,16 +52,16 @@ function Atom(props) {
         lineWidth={0.3}
         rotation={[0, 0, -1]}
       />
-      <Electron position={[0, 0, 0.5]} speed={6} />
+      <Electron position={[0, 0, 0.5]} speed={0.6} />
       <Electron
         position={[0, 0, 0.5]}
         rotation={[0, 0, Math.PI / 3]}
-        speed={6.5}
+        speed={0.65}
       />
       <Electron
         position={[0, 0, 0.5]}
         rotation={[0, 0, -Math.PI / 3]}
-        speed={7}
+        speed={0.7}
       />
       <Sphere args={[0.55, 64, 64]}>
         <meshBasicMaterial color={[6, 0.5, 2]} toneMapped={false} />
@@ -73,7 +70,7 @@ function Atom(props) {
   );
 }
 
-function Electron({ radius = 2.75, speed = 6, ...props }) {
+function Electron({ radius = 2.75, speed = 1, ...props }) {
   const ref = useRef();
   useFrame((state) => {
     const t = state.clock.getElapsedTime() * speed;
@@ -85,18 +82,10 @@ function Electron({ radius = 2.75, speed = 6, ...props }) {
   });
   return (
     <group {...props}>
-      <Trail
-        local
-        width={5}
-        length={6}
-        color={new THREE.Color(2, 1, 10)}
-        attenuation={(t) => t * t}
-      >
-        <mesh ref={ref}>
-          <sphereGeometry args={[0.25]} />
-          <meshBasicMaterial color={[10, 1, 10]} toneMapped={false} />
-        </mesh>
-      </Trail>
+      <mesh ref={ref}>
+        <sphereGeometry args={[0.25, 16, 16]} />
+        <meshBasicMaterial color={[10, 1, 10]} toneMapped={false} />
+      </mesh>
     </group>
   );
 }
