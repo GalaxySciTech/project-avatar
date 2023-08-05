@@ -1,9 +1,13 @@
 import Navbar from "../Navbar";
+import Star from "../Star";
 const Layout = ({ children }) => {
   return (
     <main>
-      <Navbar />
-      {children}
+      <Star />
+      <div className="z-50 relative">
+        <Navbar />
+        {children}
+      </div>
     </main>
   );
 };
