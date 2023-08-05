@@ -4,12 +4,12 @@ import Layout from "../components/Layout";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { optimism, zora, base } from "wagmi/chains";
+import { optimism, zora, base, goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient } = configureChains(
-  [optimism, zora, base],
+  [optimism, zora, base, goerli],
   [
     alchemyProvider({ apiKey: "LQ0xqhSEYELkJL2ToAS0S02mh8LiT_iR" }),
     publicProvider(),
@@ -27,9 +27,14 @@ const wagmiConfig = createConfig({
   publicClient,
 });
 export default function App({ Component, pageProps }) {
+  const rainbowKitConfig = {
+    chains: chains,
+    showRecentTransactions: true,
+    coolMode: true,
+  };
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider {...rainbowKitConfig}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
