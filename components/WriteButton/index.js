@@ -36,32 +36,38 @@ const WriteButton = (props) => {
 
   return (
     mounted && (
-      <>
+      <div className={props.className}>
         {!isConnected && <ConnectButton />}
         {isConnected && (
           <button
             className={
               (props?.disabled || !write || confirming ? "btn-disabled " : "") +
-              (confirming
-                ? "btn btn-primary loading btn-xs text-xs " + props.className
-                : "btn btn-primary btn-xs text-xs" + props.className)
+              "btn btn-primary btn-outline text-xs "
             }
             // disabled={props?.disabled || !write || confirming}
             style={{ minWidth: 112 }}
             onClick={() => {
               write?.();
               if (tx) {
-                addRecentTransaction({
-                  hash: tx,
-                  description: props?.buttonName,
-                });
+                try {
+                  addRecentTransaction({
+                    hash: tx,
+                    description: props?.buttonName,
+                  });
+                } catch (e) {}
               }
             }}
           >
+            {confirming && (
+              <>
+                <span className="loading loading-spinner"></span>loading
+              </>
+            )}
+
             {confirming ? lang[locale]?.confirming : props?.buttonName}
           </button>
         )}
-      </>
+      </div>
     )
   );
 };
