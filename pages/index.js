@@ -1,14 +1,12 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import WriteButton from "@/components/WriteButton";
-import { useAccount } from "wagmi";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import Loading from "@/components/Loading/Index";
+import { useEffect, useState } from "react";
 
-export default function Home() {
-  const router = useRouter();
+const Home = () => {
+  const [mount, setMount] = useState(false);
   useEffect(() => {
-    router.push("/node");
+    // setMount(true);
   }, []);
-  return <></>;
-}
+  return mount ? <></> : <Loading />;
+};
+
+export default Home;
